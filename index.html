@@ -446,10 +446,6 @@ color/colour,颜色"></textarea>
         测试单题倒计时（秒）
         <input type="number" id="settingTimer" min="5" max="120" step="1">
       </label>
-      <label class="settings-row">
-        「看中文写英文」题型占比（剩下是"看英文选中文"）
-        <input type="number" id="settingTypeARatio" min="0" max="100" step="5">
-      </label>
       <button id="btnSaveSettings" class="chalk-btn chalk-btn--primary">保存设置</button>
     </div>
   </main>
@@ -788,16 +784,12 @@ window.SEED_WORDS = [{"en": "a multitude of", "pos": "", "zh": "大量"}, {"en":
     var s = loadSettings();
     document.getElementById("settingDailyTarget").value = s.dailyTarget;
     document.getElementById("settingTimer").value = s.timerSeconds;
-    document.getElementById("settingTypeARatio").value = s.typeARatio;
     showView("settings");
   });
   document.getElementById("btnSaveSettings").addEventListener("click", function () {
     var s = loadSettings();
     s.dailyTarget = parseInt(document.getElementById("settingDailyTarget").value, 10) || DEFAULT_SETTINGS.dailyTarget;
     s.timerSeconds = parseInt(document.getElementById("settingTimer").value, 10) || DEFAULT_SETTINGS.timerSeconds;
-    var ratio = parseInt(document.getElementById("settingTypeARatio").value, 10);
-    if (isNaN(ratio)) ratio = DEFAULT_SETTINGS.typeARatio;
-    s.typeARatio = Math.max(0, Math.min(100, ratio));
     saveSettings(s);
     showView("dashboard");
   });
